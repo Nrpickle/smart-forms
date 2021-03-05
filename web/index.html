@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<head>
+
+    <title> Voltage Divider </title>
+    
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- JsMath -->
+    <!--<script src="jsMath/easy/load.js"></script>-->
+
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+
+<body>
+
+    <h1> Voltage Divider </h1>
+
+
+    This is an example file
+
+    <form id="mainForm" action="index.html" method="get">
+        R_top = <input id="Rtop" type="text" value="" /> &#x03A9; <br>
+        <input type="submit" value="submit form" />
+    </form>
+
+    <br>
+
+    R_top = <span id="Rtoppower"></span> &#x03A9; <br>
+
+    $$ 52.3 \Omega$$ 
+
+    When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+    $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+
+    <script>
+
+        $('#mainForm').submit(function() {
+
+            //$("span#Rtoppower").text( "Hello, world!").show();
+            
+            $("span#Rtoppower").text( $("input#Rtop").val() ).show();
+
+            //alert('Handler for .submit() called.');
+            
+            return false;
+        });
+
+    </script>
+
+</body>
+
+</html>
