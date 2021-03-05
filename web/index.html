@@ -4,6 +4,8 @@
 
     <title> Voltage Divider </title>
     
+    <link rel="stylesheet" href="smartform.css">
+
     <!-- JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -12,7 +14,14 @@
 
     <!-- MathJax -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+
+    <!-- Evaluatex.js -->
+    <script src="node_modules/evaluatex/dist/evaluatex.min.js"></script>
+    <script type="text/javascript">
+        evaluatex();
+    </script>
 
 </head>
 
@@ -20,13 +29,67 @@
 
     <h1> Voltage Divider </h1>
 
-
-    This is an example file
+    Divisors of voltages
 
     <form id="mainForm" action="index.html" method="get">
-        R_top = <input id="Rtop" type="text" value="" /> &#x03A9; <br>
+        <table>
+            <tr>
+                <th> Output </th>
+                <th> Input </th>
+                <th> Formula </th>
+            </tr>
+            <tr>
+                <td> <input id="vin_select" type="radio" name="selector"> </td>
+                <td> \( V_{in} \) = <input id="vin" type="text" value=""> V </td>
+                <td> <span id="vin_formula"></span>
+            <tr>
+                <td> <input id="rtop_select" type="radio" name="selector"> </td>
+                <td> \(R_{top} \) = <input id="rtop" type="text" value="" /> &#x03A9; <br> </td>
+            </tr>
+            <tr>
+                <td> <input id="rbot_select" type="radio" name="selector"> </td>
+                <td> \( R_{bott} \) = <input id="rbot" type="text" value="" /> &#x03A9; <br> </td>
+            </tr>
+            <tr>
+                <td> <input id="vout_select" type="radio" name="selector"> </td>
+                <td> \(V_{out} \) = <input id="vout" type="text" value=""> V </td>
+                <td> <span id="vout_formula"></span> </td>
+            </tr>
+
+        </table>
         <input type="submit" value="submit form" />
     </form>
+
+    <!--
+    Notes
+    TODO: 
+      [ ] Support unit prefixes
+
+    -->
+
+    <script>
+
+        function reloadLaTeX(){
+            MathJax.typeset();
+        }
+
+    </script>
+
+    <script>
+        $( document ).ready(function() {
+            console.log("Initializing Formulas");
+
+            vout_formula = "\\( V_{out} = V_{in} * \\frac{R_{bott}}{R_{top} * R_{bot}} \\) "
+
+            $('span#vout_formula').text(vout_formula);            
+
+            reloadLaTeX();
+            // window.MathJax.typeset()
+
+
+        });
+    </script>
+
 
     <br>
 
@@ -37,6 +100,21 @@
     When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
     $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
 
+    $$ \frac{5}{32} $$
+
+    <h3> Evaluatex test </h3>
+
+    <span id="testresult">10</span>
+
+    <script>
+
+        const result = evaluatex("1 + 2 + 3 / 4");
+        //result = fn();
+
+        $('#testresult').text(result);
+        //$('span#testresult').text("77");
+    </script>
+
     <script>
 
         $('#mainForm').submit(function() {
@@ -45,8 +123,12 @@
             
             $("span#Rtoppower").text( $("input#Rtop").val() ).show();
 
-            //alert('Handler for .submit() called.');
-            
+
+            $('span#testresult').text("5");
+
+            console.log("Procesing...");
+
+            //alert('Handler for .submit() called.'); 
             return false;
         });
 
