@@ -24,4 +24,8 @@ sudo docker run -it -p 80:80 \
     nginx:alpine 
 ```
 
+## Installation
 
+### Evaluatex
+
+Install yarn. The source in apt doesn't automatically get the correct yarn, see [this stack overflow post](https://stackoverflow.com/a/53471064)
